@@ -1,0 +1,57 @@
+html, body {
+  height: 100%;
+}
+ul,li,h1,h2,h3,h4,h5,body {
+  margin: 0;
+  padding: 0;
+}
+/* PANEL CONTROLS */
+/******************/
+#editor-container {
+  position: relative;
+  height: inherit;
+}
+#panels-controls-container {
+  position: relative;
+  width: 100%;
+  padding: 5px;
+  border-bottom: 1px solid #000;
+}
+#panel-controls {
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+#panel-controls button {
+  float: left;
+  border-radius: 0px;
+  border:1px solid #000;
+  padding: 5px;
+  font-size: 1.1em;
+  outline: none;
+  background: transparent;
+}
+#panel-controls button:first-child {
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+}
+#panel-controls button:last-child {
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+}
+#panel-controls button.active {
+  background: #f00;
+}
+/* PANELS */
+/**********/
+#panels {
+  list-style: none;
+}
+#panels li {
+  float: left;
+  display: inline-block;
+}
+#panels li textarea {
+  height: 100%;
+}

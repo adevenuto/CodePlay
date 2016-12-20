@@ -1,27 +1,33 @@
 html, body {
   height: 100%;
+  width: 100%;
+  margin: 0;
 }
 ul,li,h1,h2,h3,h4,h5,body {
-  margin: 0;
   padding: 0;
+}
+*{
+  box-sizing: border-box;
 }
 /* PANEL CONTROLS */
 /******************/
 #editor-container {
-  position: relative;
   height: inherit;
 }
 #panels-controls-container {
-  position: relative;
+  position: absolute;
   width: 100%;
-  padding: 5px;
+  height: 50px;
+  background: #666;
   border-bottom: 1px solid #000;
+  z-index: 10;
 }
 #panel-controls {
   display: inline-block;
   position: relative;
   left: 50%;
   transform: translate(-50%, 0);
+  top: 7px;
 }
 #panel-controls button {
   float: left;
@@ -30,7 +36,7 @@ ul,li,h1,h2,h3,h4,h5,body {
   padding: 5px;
   font-size: 1.1em;
   outline: none;
-  background: transparent;
+  background: #f00;
 }
 #panel-controls button:first-child {
   border-bottom-left-radius: 4px;
@@ -41,17 +47,39 @@ ul,li,h1,h2,h3,h4,h5,body {
   border-top-right-radius: 4px;
 }
 #panel-controls button.active {
-  background: #f00;
+  background: #fff;
 }
 /* PANELS */
 /**********/
-#panels {
-  list-style: none;
+.hide {
+  display: none;
 }
-#panels li {
-  float: left;
-  display: inline-block;
-}
-#panels li textarea {
+#panels-container {
   height: 100%;
+  width: 100%;
+  border-left: 1px solid #000;
+  display: flex;
+}
+#code-panels {
+  overflow: hidden;
+}
+#output-panel {
+  padding-top: 50px;
+  background: #fff;
+  overflow: hidden;
+  min-width: 50px;
+  flex-grow: 1;
+}
+.panel {
+  height: inherit;
+  /*width: 33.33%;*/
+  /*min-width: 5%;*/
+  float: left;
+}
+.panel textarea {
+  padding-top: 50px;
+  background: #ebebeb;
+  width: 100%;
+  height: 100%;
+  resize: none;
 }

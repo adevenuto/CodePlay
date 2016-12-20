@@ -2,36 +2,36 @@
 <head>
   <title></title>
   <link rel="stylesheet" type="text/css" href="assets/css/codeplay.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
-
 <div id="editor-container">
   <div id="panels-controls-container">
     <div id="panel-controls">
-      <button class="active">HTML</button>
+      <button>HTML</button>
       <button>CSS</button>
       <button>JS</button>
       <button>OUTPUT</button>
     </div>
   </div>
+
+
   <div id="panels-container">
-    <ul id="panels">
-      <li id="html-panel">
-        <textarea></textarea>
-      </li>
-      <li id="css-panel">
-        <textarea></textarea>
-      </li>
-      <li id="js-panel">
-        <textarea></textarea>
-      </li>
-      <li id="output">
-        <textarea></textarea>
-      </li>
-    </ul>
+
+    <div id="code-panels">
+        <div class="panel resize" id="html-panel"><textarea>html</textarea></div>
+        <div class="panel resize" id="css-panel"><textarea>css</textarea></div>
+        <div class="panel resize" id="js-panel"><textarea>js</textarea></div>
+    </div>
+    <div id="output-panel">
+      Tony
+    </div>
+
+
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="assets/js/main.js"></script>
 </body>
 </html>

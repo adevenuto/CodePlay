@@ -17,16 +17,41 @@
 
 
   <div id="panels-container">
-
-    <div id="code-panels">
-        <div class="panel resize" id="html-panel"><textarea>html</textarea></div>
-        <div class="panel resize" id="css-panel"><textarea>css</textarea></div>
-        <div class="panel resize" id="js-panel"><textarea>js</textarea></div>
+    <div class="panel resize" id="html-panel">
+      <div class="panel-name">
+        html
+      </div>
+      <textarea id="html-input"></textarea>
     </div>
+    <div class="panel resize" id="css-panel">
+      <div class="panel-name">
+        css
+      </div>
+      <textarea id="css-input"></textarea>
+    </div>
+    <div class="panel resize" id="js-panel">
+      <div class="panel-name">
+        js
+      </div>
+      <textarea id="js-input"></textarea>
+    </div>
+
     <div id="output-panel">
-      Tony
-    </div>
 
+      <iframe id="output" frameborder="0">
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="UTF-8">
+            <title></title>
+          </head>
+          <body>
+
+          </body>
+        </html>
+      </iframe>
+
+    </div>
 
   </div>
 </div>

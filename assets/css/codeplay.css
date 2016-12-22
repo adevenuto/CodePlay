@@ -61,22 +61,21 @@ ul,li,h1,h2,h3,h4,h5,body {
   display: flex;
 }
 #output-panel {
-  /*position: relative;*/
-  padding-top: 50px;
+  position: relative;
   background: #fff;
   min-width: 50px;
   flex-grow: 1;
 }
 #output {
-  /*position: absolute;
-  top: 0;
-  left: 0;*/
+  position: absolute;
+  top: 0px;
+  height: 100%;
   width: 100%;
-  height: auto;
-  /*padding-top: 50px;*/
+  padding-top: 50px;
   border: none;
-  /*resize: both;*/
-  overflow: hidden;
+  resize: both;
+  /*overflow: hidden;*/
+  pointer-events: none;
 }
 .panel {
   position: relative;

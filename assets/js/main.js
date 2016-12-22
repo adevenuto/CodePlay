@@ -41,15 +41,30 @@ $(".resize").resizable({
 var output = {
   init: function() {
     this.cacheDom();
-
   },
   cacheDom: function() {
     this.$display = $('#output');
-    this.$head = $('#output').find('head');
-    this.$content = $('#output').find('body');
+    this.addTags();
+    this.$styles = this.$display.contents().find('style');
+    this.$content = this.$display.contents().find('body');
+  },
+  addTags: function() {
+    this.$display.contents().find('head').append("<style></style>")
+  },
+  renderHtml: function(html) {
+    this.$content.html(html);
+  },
+  renderCss: function(css) {
+    console.log(this.$styles)
+    this.$styles.html(css);
+  },
+  renderJs: function(x) {
+    console.log(x)
   }
 }
 output.init();
+
+
 
 var input = {
   init: function() {
@@ -63,18 +78,18 @@ var input = {
     this.$jsIn = this.$panels.find('#js-input');
   },
   bindEvent: function() {
-    this.$htmlIn.on('keyup paste', this.htmlOutput.bind(this))
-    this.$cssIn.on('keyup paste', this.cssOutput.bind(this))
-    this.$jsIn.on('keyup paste', this.jsOutput.bind(this))
+    this.$htmlIn.on('chnage keyup paste', this.htmlOutput.bind(this))
+    this.$cssIn.on('chnage keyup paste', this.cssOutput.bind(this))
+    this.$jsIn.on('chnage keyup paste', this.jsOutput.bind(this))
   },
   htmlOutput: function() {
-    console.log("html");
+    output.renderHtml(this.$htmlIn.val());
   },
   cssOutput: function() {
-    console.log("css");
+    output.renderCss(this.$cssIn.val());
   },
   jsOutput: function() {
-    console.log("js");
+    output.renderJs("js");
   }
 }
 input.init();

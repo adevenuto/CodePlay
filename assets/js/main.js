@@ -49,17 +49,16 @@ var output = {
     this.$content = this.$display.contents().find('body');
   },
   addTags: function() {
-    this.$display.contents().find('head').append("<style></style>")
+    this.$display.contents().find('head').append("<style type='text/css'></style>")
   },
   renderHtml: function(html) {
     this.$content.html(html);
   },
   renderCss: function(css) {
-    console.log(this.$styles)
     this.$styles.html(css);
   },
-  renderJs: function(x) {
-    console.log(x)
+  renderJs: function(js) {
+    document.getElementById('output').contentWindow.eval(js)
   }
 }
 output.init();
@@ -75,12 +74,14 @@ var input = {
     this.$panels = $('#panels-container');
     this.$htmlIn = this.$panels.find('#html-input');
     this.$cssIn = this.$panels.find('#css-input');
+
     this.$jsIn = this.$panels.find('#js-input');
+    this.$jsRun = this.$panels.find('#runScript');
   },
   bindEvent: function() {
     this.$htmlIn.on('chnage keyup paste', this.htmlOutput.bind(this))
     this.$cssIn.on('chnage keyup paste', this.cssOutput.bind(this))
-    this.$jsIn.on('chnage keyup paste', this.jsOutput.bind(this))
+    this.$jsRun.on('click', this.jsOutput.bind(this))
   },
   htmlOutput: function() {
     output.renderHtml(this.$htmlIn.val());
@@ -89,7 +90,7 @@ var input = {
     output.renderCss(this.$cssIn.val());
   },
   jsOutput: function() {
-    output.renderJs("js");
+    output.renderJs(this.$jsIn.val());
   }
 }
 input.init();

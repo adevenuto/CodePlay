@@ -24,8 +24,12 @@ $(".resize").resizable({
   handles: 'e',
   minWidth: 20,
   start:function(){
+     $("#output").addClass('pointer-evnt-none');
      this.other = $(this).next();
      this.startWidth = this.other.width();
+  },
+  stop: function() {
+    $("#output").removeClass('pointer-evnt-none');
   },
   resize:function(e,ui) {
      var minWidth = ui.element.resizable("option", "minWidth");
@@ -44,11 +48,11 @@ var output = {
   },
   cacheDom: function() {
     this.$display = $('#output');
-    this.addTags();
+    this.addTag();
     this.$styles = this.$display.contents().find('style');
     this.$content = this.$display.contents().find('body');
   },
-  addTags: function() {
+  addTag: function() {
     this.$display.contents().find('head').append("<style type='text/css'></style>")
   },
   renderHtml: function(html) {
@@ -62,8 +66,6 @@ var output = {
   }
 }
 output.init();
-
-
 
 var input = {
   init: function() {

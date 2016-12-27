@@ -82,10 +82,11 @@ ul,li,h1,h2,h3,h4,h5,body {
   position: relative;
   height: inherit;
   border-right: 1px solid #000;
+  width: 20%;
 }
 #runScript {
   position: absolute;
-  left: 3px;
+  left: 34px;
   top: 53px;
   display: inline-block;
   border: 1px solid #000;
@@ -94,6 +95,7 @@ ul,li,h1,h2,h3,h4,h5,body {
   padding: 0 3px 1px 3px;
   color: #000;
   opacity: .5;
+  z-index: 10;
 }
 .panel-name {
   position: absolute;
@@ -115,4 +117,22 @@ ul,li,h1,h2,h3,h4,h5,body {
   height: 100%;
   resize: none;
   border: none;
+}
+
+
+
+.CodeMirror {
+  background: transparent;
+  width: 100%;
+  height: auto;
+}
+.CodeMirror-sizer {
+  top: 75px;
+}
+.CodeMirror-scroll {
+  width: 100%;
+  overflow: auto !important;
+}
+.CodeMirror-hscrollbar {
+  overflow-x: hidden;
 }

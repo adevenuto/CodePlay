@@ -62,6 +62,7 @@ var output = {
     this.$styles.html(css);
   },
   renderJs: function(js) {
+    console.log(js)
     document.getElementById('output').contentWindow.eval(js)
   }
 }
@@ -74,25 +75,25 @@ var input = {
   },
   cacheDom: function() {
     this.$panels = $('#panels-container');
-    this.$htmlIn = this.$panels.find('#html-input');
-    this.$cssIn = this.$panels.find('#css-input');
-
-    this.$jsIn = this.$panels.find('#js-input');
+    this.$htmlIn = this.$panels.find('#html-panel .CodeMirror');
+    this.$cssIn = this.$panels.find('#css-panel .CodeMirror');
+    this.$jsIn = this.$panels.find('#js-panel .CodeMirror');
     this.$jsRun = this.$panels.find('#runScript');
   },
   bindEvent: function() {
-    this.$htmlIn.on('chnage keyup paste', this.htmlOutput.bind(this))
-    this.$cssIn.on('chnage keyup paste', this.cssOutput.bind(this))
+    this.$htmlIn.on('change keyup paste', this.htmlOutput.bind(this))
+    this.$cssIn.on('change keyup paste', this.cssOutput.bind(this))
     this.$jsRun.on('click', this.jsOutput.bind(this))
   },
   htmlOutput: function() {
-    output.renderHtml(this.$htmlIn.val());
+    output.renderHtml(editorHtml.getValue());
   },
   cssOutput: function() {
-    output.renderCss(this.$cssIn.val());
+    output.renderCss(editorCss.getValue());
   },
   jsOutput: function() {
-    output.renderJs(this.$jsIn.val());
+    console.log('hello')
+    output.renderJs(editorJs.getValue());
   }
 }
 input.init();

@@ -136,3 +136,6 @@ ul,li,h1,h2,h3,h4,h5,body {
 .CodeMirror-hscrollbar {
   overflow-x: hidden;
 }
+.CodeMirror-linenumber {
+  font-size: .8em;
+}

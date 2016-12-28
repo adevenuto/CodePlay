@@ -3,11 +3,11 @@
   <title>CodePlay</title>
   <link rel="stylesheet" type="text/css" href="plugin/codemirror/lib/codemirror.css">
   <link rel="stylesheet" type="text/css" href="assets/css/codeplay.css">
+  <link rel="stylesheet" type="text/css" href="plugin/codemirror/theme/neat.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
 <div id="editor-container">
-
   <div id="panels-controls-container">
     <div id="panel-controls">
       <button>HTML</button>
@@ -16,8 +16,6 @@
       <button>OUTPUT</button>
     </div>
   </div>
-
-
   <div id="panels-container">
     <div class="panel resize" id="html-panel">
       <div class="panel-name">
@@ -40,20 +38,23 @@
       </div>
       <textarea id="js-input"></textarea>
     </div>
-
     <div id="output-panel">
       <iframe id="output" allowfullscreen ></iframe>
     </div>
-
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="plugin/codemirror/lib/codemirror.js"></script>
+<script type="text/javascript" src="plugin/codemirror/lib/codemirror.js"></script>
+<script type="text/javascript" src="plugin/codemirror/dist/emmet.js"></script>
+<script src="plugin/codemirror/addon/edit/closebrackets.js"></script>
+<script src="plugin/codemirror/addon/edit/closetag.js"></script>
+<script src="plugin/codemirror/addon/edit/matchtags.js"></script>
+<script type="text/javascript" src="plugin/codemirror/mode/xml/xml.js"></script>
+<script type="text/javascript" src="plugin/codemirror/mode/css/css.js"></script>
+<script type="text/javascript" src="plugin/codemirror/mode/javascript/javascript.js"></script>
 <script type="text/javascript" src="assets/js/editor.js"></script>
 <script type="text/javascript" src="assets/js/main.js"></script>
-
-
 </body>
 </html>
 

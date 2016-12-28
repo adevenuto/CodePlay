@@ -62,12 +62,11 @@ var output = {
     this.$styles.html(css);
   },
   renderJs: function(js) {
-    console.log(js)
     document.getElementById('output').contentWindow.eval(js)
   }
 }
 output.init();
-
+////////////////////////////////////////////////////////////
 var input = {
   init: function() {
     this.cacheDom();
@@ -92,17 +91,7 @@ var input = {
     output.renderCss(editorCss.getValue());
   },
   jsOutput: function() {
-    console.log('hello')
     output.renderJs(editorJs.getValue());
   }
 }
 input.init();
-
-
-
-
-// $("#textarea").on('change keyup paste', function() {
-//     // your code here
-// });
-// $('#output').contents().find('body').html("<h1>Hello</h1>")
-// $('#output').contents().find('head').append("<style> h1 { color: red } </style>")

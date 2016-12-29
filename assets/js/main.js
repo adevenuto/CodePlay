@@ -1,3 +1,67 @@
+var update = {
+  init: function() {
+    this.buildDoc();
+  },
+  cacheDom: function() {
+    this.$display = $('#output');
+    this.$styles = this.$display.contents().find('style');
+    this.$content = this.$display.contents().find('body').attr('id','iFrameBody');
+  },
+  buildDoc: function() {
+    var frame = document.getElementById('output'),
+        doc = frame.contentDocument || frame.contentWindow.document;
+        doc.open();
+        doc.write('<style type="text/css">' + editorCss.getValue() + '</style>'),
+        doc.write('<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>'),
+        doc.write('<body>' + editorHtml.getValue() + '<script>' + editorJs.getValue() + '</script>' + '</body>'),
+        doc.close();
+        this.cacheDom();
+  },
+  renderHtml: function(html) {
+    this.$content.html(html);
+  },
+  renderCss: function(css) {
+    this.$styles.html(css);
+  }
+}
+update.init();
+////////////////////////////////////////////////////////////
+var input = {
+  init: function() {
+    this.cacheDom();
+    this.bindEvent();
+  },
+  cacheDom: function() {
+    this.$panels = $('#panels-container');
+    this.$htmlIn = this.$panels.find('#html-panel .CodeMirror');
+    this.$cssIn = this.$panels.find('#css-panel .CodeMirror');
+    this.$jsRun = this.$panels.find('#runScript');
+  },
+  bindEvent: function() {
+    this.$htmlIn.on('change keyup paste', this.htmlUpdate.bind(this))
+    this.$cssIn.on('change keyup paste', this.cssUpdate.bind(this))
+    this.$jsRun.on('click', this.docUpdate.bind(this))
+  },
+  docUpdate: function() {
+    update.init();
+  },
+  htmlUpdate: function() {
+    update.renderHtml(editorHtml.getValue());
+  },
+  cssUpdate: function() {
+    update.renderCss(editorCss.getValue());
+  }
+}
+input.init();
+
+
+
+
+
+
+
+
+
 var controls = {
   init: function() {
     this.cacheDom();
@@ -41,57 +105,3 @@ $(".resize").resizable({
      this.other.width( Math.max(50, this.startWidth - diffW)  );
    }
 });
-/////////////////////////////////////////////////////////
-var output = {
-  init: function() {
-    this.cacheDom();
-  },
-  cacheDom: function() {
-    this.$display = $('#output');
-    this.addTag();
-    this.$styles = this.$display.contents().find('style');
-    this.$content = this.$display.contents().find('body');
-  },
-  addTag: function() {
-    this.$display.contents().find('head').append("<style type='text/css'></style>")
-  },
-  renderHtml: function(html) {
-    this.$content.html(html);
-  },
-  renderCss: function(css) {
-    this.$styles.html(css);
-  },
-  renderJs: function(js) {
-    document.getElementById('output').contentWindow.eval(js)
-  }
-}
-output.init();
-////////////////////////////////////////////////////////////
-var input = {
-  init: function() {
-    this.cacheDom();
-    this.bindEvent();
-  },
-  cacheDom: function() {
-    this.$panels = $('#panels-container');
-    this.$htmlIn = this.$panels.find('#html-panel .CodeMirror');
-    this.$cssIn = this.$panels.find('#css-panel .CodeMirror');
-    this.$jsIn = this.$panels.find('#js-panel .CodeMirror');
-    this.$jsRun = this.$panels.find('#runScript');
-  },
-  bindEvent: function() {
-    this.$htmlIn.on('change keyup paste', this.htmlOutput.bind(this))
-    this.$cssIn.on('change keyup paste', this.cssOutput.bind(this))
-    this.$jsRun.on('click', this.jsOutput.bind(this))
-  },
-  htmlOutput: function() {
-    output.renderHtml(editorHtml.getValue());
-  },
-  cssOutput: function() {
-    output.renderCss(editorCss.getValue());
-  },
-  jsOutput: function() {
-    output.renderJs(editorJs.getValue());
-  }
-}
-input.init();

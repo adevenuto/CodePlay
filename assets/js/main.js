@@ -11,11 +11,16 @@ var update = {
     var frame = document.getElementById('output'),
         doc = frame.contentDocument || frame.contentWindow.document;
         doc.open();
+        // Head Content
+        doc.write('<link rel="stylesheet prefetch" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">'),
         doc.write('<style type="text/css">' + editorCss.getValue() + '</style>'),
-        doc.write('<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>'),
-        doc.write('<body>' + editorHtml.getValue() + '<script>' + editorJs.getValue() + '</script>' + '</body>'),
+        // Body Content
+        doc.write('<body>' + editorHtml.getValue() +
+          '<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>' +
+          '<script>' + editorJs.getValue() + '</script>' +
+          '</body>'),
         doc.close();
-        this.cacheDom();
+    this.cacheDom();
   },
   renderHtml: function(html) {
     this.$content.html(html);

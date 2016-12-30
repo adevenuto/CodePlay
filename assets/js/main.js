@@ -84,7 +84,7 @@ var controls = {
     var $panel = e.target.innerHTML.toLowerCase();
     var $targetPanel = "#"+$panel+"-panel";
     $($targetPanel).toggleClass('hide');
-    $(e.target).toggleClass('active');
+    $(e.target).toggleClass('panel-hide');
   }
 }
 controls.init();

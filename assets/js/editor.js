@@ -10,7 +10,7 @@
     autoCloseBrackets: true,
     autoCloseTags: true,
     matchTag: true,
-    theme: "neat"
+    theme: "mbo"
   });
   emmetCodeMirror(editorHtml);
   var editorCss = CodeMirror.fromTextArea(cssCode, {
@@ -18,12 +18,12 @@
     lineWrapping: true,
     autoCloseBrackets: true,
     mode: "css",
-    theme: "neat"
+    theme: "mbo"
   });
   var editorJs = CodeMirror.fromTextArea(jsCode, {
     lineNumbers: true,
     lineWrapping: true,
     autoCloseBrackets: true,
     mode: "javascript",
-    theme: "neat"
+    theme: "mbo"
   });

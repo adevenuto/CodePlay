@@ -2,47 +2,63 @@
 <head>
   <title>CodePlay</title>
   <link rel="stylesheet" type="text/css" href="plugin/codemirror/lib/codemirror.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/codeplay.css">
+  <link rel="stylesheet prefetch" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="plugin/codemirror/theme/mbo.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/codeplay.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
 <div id="editor-container">
+  <!-- Panel Controls -->
   <div id="panels-controls-container">
     <div id="panel-controls">
-      <button>HTML</button>
-      <button>CSS</button>
-      <button>JS</button>
-      <button>OUTPUT</button>
+      <button>html</button>
+      <button>css</button>
+      <button>js</button>
+      <button>output</button>
+    </div>
+  </div>
+  <!-- Editor Panels -->
+  <div id="panels-container">
+    <div class="panel resize" id="html-panel">
+      <div class="panel-name">
+        <i class="fa fa-gear"></i><span>|</span>html
+      </div>
+      <textarea id="html-input"></textarea>
+    </div>
+    <div class="panel resize" id="css-panel">
+      <div class="panel-name">
+        <i class="fa fa-gear"></i><span>|</span>css
+      </div>
+      <textarea id="css-input"></textarea>
+    </div>
+    <div class="panel resize" id="js-panel">
+      <div id="runScript">
+        run
+      </div>
+      <div class="panel-name">
+        <i class="fa fa-gear"></i><span>|</span>js
+      </div>
+      <textarea id="js-input"></textarea>
+    </div>
+    <!-- Sandbox -->
+    <div id="output-panel">
+      <iframe sandbox="allow-same-origin allow-scripts allow-modals" id="output" allowfullscreen ></iframe>
+    </div>
+  </div>
+  <!-- Settings Modal -->
+  <div id="overlay" class="hide"></div>
+  <div id="settings-modal-container" class="hide">
+    <div id="settings-modal">
+      <h1>Settings</h1>
+      <div id="html-settings"></div>
+      <div id="css-settings"></div>
+      <div id="js-settings"></div>
+      <div id="save">Save Settings</div>
     </div>
   </div>
 
-    <div id="panels-container">
-      <div class="panel resize" id="html-panel">
-        <div class="panel-name">
-          html
-        </div>
-        <textarea id="html-input"></textarea>
-      </div>
-      <div class="panel resize" id="css-panel">
-        <div class="panel-name">
-          css
-        </div>
-        <textarea id="css-input"></textarea>
-      </div>
-      <div class="panel resize" id="js-panel">
-        <div id="runScript">
-          RUN
-        </div>
-        <div class="panel-name">
-          js
-        </div>
-        <textarea id="js-input"></textarea>
-      </div>
-      <div id="output-panel">
-        <iframe sandbox="allow-same-origin allow-scripts allow-modals" id="output" allowfullscreen ></iframe>
-      </div>
-    </div>
 
 
 

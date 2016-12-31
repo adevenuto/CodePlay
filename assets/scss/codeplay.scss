@@ -1,90 +1,95 @@
+$modal-border: #ff5747;
+
 html, body {
   height: 100%;
-  width: 100%; }
-
-ul, li, h1, h2, h3, h4, h5, body {
+  width: 100%;
+}
+ul,li,h1,h2,h3,h4,h5,body {
   padding: 0;
   margin: 0;
-  font-family: 'PT Sans Narrow', sans-serif; }
-
-* {
-  box-sizing: border-box; }
-
+  font-family: 'PT Sans Narrow', sans-serif;
+}
+*{
+  box-sizing: border-box;
+}
 .hide {
-  display: none; }
-
+  display: none;
+}
 .show {
-  display: block; }
-
+  display: block;
+}
 /* PANEL CONTROLS */
 /******************/
 #editor-container {
   position: relative;
-  height: inherit; }
-
+  height: inherit;
+}
 #panels-controls-container {
   position: absolute;
   width: 100%;
   height: 50px;
   background: #666;
   border-bottom: 1px solid #000;
-  z-index: 91; }
-
+  z-index: 91;
+}
 #panel-controls {
   display: inline-block;
   position: relative;
   left: 50%;
   transform: translate(-50%, 0);
-  top: 10px; }
-  #panel-controls button {
+  top: 10px;
+  button {
     float: left;
     margin: 0;
     border-radius: 0px;
     text-transform: uppercase;
-    border: 1px solid #000;
+    border:1px solid #000;
     padding: 4px;
     font-size: 1em;
     outline: none;
-    background: #daff00; }
-    #panel-controls button:first-child {
+    background: #daff00;
+    &:first-child {
       border-bottom-left-radius: 4px;
-      border-top-left-radius: 4px; }
-    #panel-controls button:last-child {
+      border-top-left-radius: 4px;
+    }
+    &:last-child {
       border-bottom-right-radius: 4px;
-      border-top-right-radius: 4px; }
-
+      border-top-right-radius: 4px;
+    }
+  }
+}
 #panel-controls button.panel-hide {
-  background: #bfbfbf; }
-
+  background: #bfbfbf;
+}
 /* PANELS */
 /**********/
 #panels-container {
   height: 100%;
   width: 100%;
   border-left: 1px solid #000;
-  display: flex; }
-
+  display: flex;
+}
 #output-panel {
   position: relative;
-  flex-grow: 1; }
-
+  flex-grow: 1;
+}
 #output {
   position: absolute;
   top: 0px;
   width: 100%;
   height: 100%;
   padding-top: 50px;
-  border: none; }
-
+  border: none;
+}
 .pointer-evnt-none {
-  pointer-events: none; }
-
+  pointer-events: none;
+}
 .panel {
   position: relative;
   height: inherit;
   border-right: 1px solid #000;
-  width: 25%; }
-  .panel textarea {
+  width: 25%;
+  textarea {
     padding: 80px 5px 5px 5px;
     font-size: .9em;
     background: #ebebeb;
@@ -92,8 +97,9 @@ ul, li, h1, h2, h3, h4, h5, body {
     width: 100%;
     height: 100%;
     resize: none;
-    border: none; }
-
+    border: none;
+  }
+}
 .panel-name {
   position: absolute;
   border: 1px solid #000;
@@ -105,11 +111,12 @@ ul, li, h1, h2, h3, h4, h5, body {
   top: 53px;
   right: 3px;
   padding: 3px;
-  z-index: 10; }
-  .panel-name span {
+  z-index: 10;
+  span {
     margin: 0 8px;
-    color: #ff5722; }
-
+    color: #ff5722;
+  }
+}
 #runScript {
   position: absolute;
   border: 1px solid #fff;
@@ -124,41 +131,42 @@ ul, li, h1, h2, h3, h4, h5, body {
   padding: 3px 6px;
   opacity: .5;
   transition: opacity, 100ms ease-in-out;
-  z-index: 10; }
-
+  z-index: 10;
+}
 #runScript:hover {
-  opacity: 1; }
-
+  opacity: 1;
+}
 .fa-gear {
   cursor: pointer;
-  color: #fff; }
-
+  color: #fff;
+}
 /* SETTINGS-MODAL */
 #settings-modal {
   position: absolute;
   top: 100px;
   left: 50%;
   transform: translate(-50%, 0);
-  border: 1px solid #ff5747;
+  border: 1px solid $modal-border;
   min-width: 400px;
   width: 55%;
   padding: 10px;
   z-index: 9999;
   background: #fff;
-  color: #000; }
-  #settings-modal h1 {
-    border-bottom: 2px solid #000; }
-
+  color: #000;
+  h1 {
+    border-bottom: 2px solid #000;
+  }
+}
 #overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.5);
   border: 2px solid #000;
-  z-index: 999; }
-
+  z-index: 999;
+}
 #save {
   position: absolute;
   left: 50%;
@@ -168,29 +176,32 @@ ul, li, h1, h2, h3, h4, h5, body {
   border: 1px solid #fff;
   padding: 5px;
   transition: color, border, 200ms ease-in-out;
-  cursor: pointer; }
-  #save:hover {
-    color: #ff5747;
-    border: 1px solid #ff5747; }
+  cursor: pointer;
+  &:hover {
+    color: $modal-border;
+    border: 1px solid $modal-border;
+  }
+}
 
 /* CODE-MIRROR */
 .CodeMirror {
   background: transparent;
   width: 100%;
-  height: auto; }
-
+  height: auto;
+}
 .CodeMirror-sizer {
-  top: 85px; }
-
+  top: 85px;
+}
 .CodeMirror-scroll {
   width: 100%;
-  overflow: auto !important; }
-
+  overflow: auto !important;
+}
 .CodeMirror-hscrollbar {
-  overflow-x: hidden; }
-
+  overflow-x: hidden;
+}
 .CodeMirror-linenumber {
-  font-size: .8em; }
-
+  font-size: .8em;
+}
 .cm-s-mbo.CodeMirror {
-  background: #000; }
+  background: #000;
+}

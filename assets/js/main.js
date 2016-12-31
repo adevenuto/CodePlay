@@ -1,3 +1,30 @@
+var resources = {
+  links: ['http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'],
+  scripts: []
+}
+
+var settingsModal = {
+  init: function() {
+    this.cacheDom();
+    this.bindEvent();
+  },
+  cacheDom: function() {
+    this.$modal = $('#settings-modal-container');
+    this.$overlay = $('#overlay');
+    this.$settingsBtn = $('.fa-gear');
+    this.$saveSettingsBtn = $('#save');
+  },
+  bindEvent: function() {
+    this.$settingsBtn.on('click', this.toggleSettings.bind(this));
+    this.$overlay.on('click', this.toggleSettings.bind(this));
+  },
+  toggleSettings: function() {
+    this.$modal.toggleClass('show');
+    this.$overlay.toggleClass('show');
+  }
+  // Do Something When Save Is Clicked
+}
+settingsModal.init();
 var update = {
   init: function() {
     this.buildDoc();
@@ -12,13 +39,13 @@ var update = {
         doc = frame.contentDocument || frame.contentWindow.document;
         doc.open();
         // Head Content
-        doc.write('<link rel="stylesheet prefetch" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">'),
-        doc.write('<style type="text/css">' + editorCss.getValue() + '</style>'),
+        doc.write('<link rel="stylesheet prefetch" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">')
+        doc.write('<style type="text/css">' + editorCss.getValue() + '</style>')
         // Body Content
         doc.write('<body>' + editorHtml.getValue() +
           '<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>' +
           '<script>' + editorJs.getValue() + '</script>' +
-          '</body>'),
+          '</body>')
         doc.close();
     this.cacheDom();
   },

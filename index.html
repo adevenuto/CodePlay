@@ -3,7 +3,7 @@
   <title>CodePlay</title>
   <link rel="stylesheet" type="text/css" href="plugin/codemirror/lib/codemirror.css">
   <link rel="stylesheet prefetch" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="plugin/codemirror/theme/mbo.css">
   <link rel="stylesheet" type="text/css" href="assets/css/codeplay.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -52,9 +52,20 @@
   <div id="settings-modal-container" class="hide">
     <div id="settings-modal">
       <h1>Settings</h1>
-      <div id="html-settings"></div>
-      <div id="css-settings"></div>
-      <div id="js-settings"></div>
+      <ul id="modal-nav">
+        <li><h3><a href="#html-settings" class="modal-nav-a">html</a></h3></li>
+        <li><h3><a href="#css-settings" class="modal-nav-a">css</a></h3></li>
+        <li><h3><a href="#js-settings" class="modal-nav-a">javascript</a></h3></li>
+      </ul>
+      <div id="html-settings" class="language hide">
+        <p>HTML burgdoggen pastrami meatball beef ribs prosciutto spare ribs eiusmod non sed cow aliquip qui. Capicola picanha salami consectetur magna est filet mignon aute beef ribs id. Flank pork loin pig shoulder in. Landjaeger consectetur laborum strip steak spare ribs non beef shank.</p>
+      </div>
+      <div id="css-settings" class="language hide">
+        <p>CSS burgdoggen pastrami meatball beef ribs prosciutto spare ribs eiusmod non sed cow aliquip qui. Capicola picanha salami consectetur magna est filet mignon aute beef ribs id. Flank pork loin pig shoulder in. Landjaeger consectetur laborum strip steak spare ribs non beef shank.</p>
+      </div>
+      <div id="js-settings" class="language hide">
+        <p>JAVASCRIPT burgdoggen pastrami meatball beef ribs prosciutto spare ribs eiusmod non sed cow aliquip qui. Capicola picanha salami consectetur magna est filet mignon aute beef ribs id. Flank pork loin pig shoulder in. Landjaeger consectetur laborum strip steak spare ribs non beef shank.</p>
+      </div>
       <div id="save">Save Settings</div>
     </div>
   </div>

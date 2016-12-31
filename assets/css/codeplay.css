@@ -5,6 +5,7 @@ html, body {
 ul, li, h1, h2, h3, h4, h5, body {
   padding: 0;
   margin: 0;
+  font-weight: 400;
   font-family: 'PT Sans Narrow', sans-serif; }
 
 * {
@@ -147,7 +148,26 @@ ul, li, h1, h2, h3, h4, h5, body {
   background: #fff;
   color: #000; }
   #settings-modal h1 {
-    border-bottom: 2px solid #000; }
+    font-weight: 700;
+    border-bottom: 2px solid #666;
+    margin-bottom: 5px;
+    text-transform: uppercase; }
+  #settings-modal ul {
+    display: flex; }
+  #settings-modal a {
+    color: #666;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 100ms ease-in-out; }
+    #settings-modal a:hover {
+      color: #000; }
+  #settings-modal li {
+    list-style: none;
+    padding-right: 30px; }
+
+#modal-nav a.active {
+  color: #000;
+  font-weight: 700; }
 
 #overlay {
   position: absolute;

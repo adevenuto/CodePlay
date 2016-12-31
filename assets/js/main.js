@@ -13,10 +13,26 @@ var settingsModal = {
     this.$overlay = $('#overlay');
     this.$settingsBtn = $('.fa-gear');
     this.$saveSettingsBtn = $('#save');
+    this.$modalNavBtn = $('.modal-nav-a');
+    this.$language = $('.language');
   },
   bindEvent: function() {
     this.$settingsBtn.on('click', this.toggleSettings.bind(this));
     this.$overlay.on('click', this.toggleSettings.bind(this));
+    this.$modalNavBtn.on('click', this.toggleState.bind(this));
+  },
+  focusSettings: function() {
+
+  },
+  toggleState: function(e) {
+    var target = $(e.target);
+    // Toggle Nav Btn
+    target.toggleClass('active');
+    this.$modalNavBtn.not(target).removeClass('active');
+    // Toggle Setting Type
+    var currentTarget = this.$modal.find(target.attr('href'));
+    currentTarget.toggleClass('show');
+    this.$language.not(currentTarget).removeClass('show');
   },
   toggleSettings: function() {
     this.$modal.toggleClass('show');

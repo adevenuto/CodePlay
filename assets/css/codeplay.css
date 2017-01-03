@@ -21,22 +21,20 @@ ul, li, h1, h2, h3, h4, h5, body {
 /******************/
 #editor-container {
   position: relative;
-  height: inherit; }
+  height: inherit;
+  display: flex;
+  flex-direction: column; }
 
 #panels-controls-container {
-  position: absolute;
-  width: 100%;
-  height: 50px;
+  padding: 8px;
   background: #666;
-  border-bottom: 1px solid #000;
-  z-index: 91; }
+  border-bottom: 2px solid #000; }
 
 #panel-controls {
   display: inline-block;
   position: relative;
   left: 50%;
-  transform: translate(-50%, 0);
-  top: 10px; }
+  transform: translate(-50%, 0); }
   #panel-controls button {
     float: left;
     margin: 0;
@@ -61,8 +59,6 @@ ul, li, h1, h2, h3, h4, h5, body {
 /**********/
 #panels-container {
   height: 100%;
-  width: 100%;
-  border-left: 1px solid #000;
   display: flex; }
 
 #output-panel {
@@ -74,14 +70,12 @@ ul, li, h1, h2, h3, h4, h5, body {
   top: 0px;
   width: 100%;
   height: 100%;
-  padding-top: 50px;
   border: none; }
 
 .pointer-evnt-none {
   pointer-events: none; }
 
 .panel {
-  position: relative;
   height: inherit;
   border-right: 1px solid #000;
   width: 25%; }
@@ -103,7 +97,7 @@ ul, li, h1, h2, h3, h4, h5, body {
   text-transform: uppercase;
   background: #666;
   color: #fff;
-  top: 53px;
+  top: 3px;
   right: 3px;
   padding: 3px;
   z-index: 10; }
@@ -113,22 +107,22 @@ ul, li, h1, h2, h3, h4, h5, body {
 
 #runScript {
   position: absolute;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   border-radius: 3px;
   cursor: pointer;
   display: inline-block;
   text-transform: uppercase;
-  background: transparent;
+  background: #000;
   color: #fff;
-  top: 53px;
+  top: 3px;
   left: 34px;
-  padding: 3px 6px;
-  opacity: .5;
+  padding: 2px 10px;
+  letter-spacing: 4px;
   transition: opacity, 100ms ease-in-out;
   z-index: 10; }
 
-#runScript:hover {
-  opacity: 1; }
+#runScript.isEmpty {
+  opacity: .5; }
 
 .fa-gear {
   cursor: pointer;
@@ -200,7 +194,7 @@ ul, li, h1, h2, h3, h4, h5, body {
   height: auto; }
 
 .CodeMirror-sizer {
-  top: 85px; }
+  top: 40px; }
 
 .CodeMirror-scroll {
   width: 100%;

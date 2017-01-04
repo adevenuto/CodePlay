@@ -29,10 +29,25 @@ $(function(){
   });
   /////////////////////////////////////////////////////
   var resources = {
+    init: function() {
+      this.cacheDom();
+      this.bindEvent();
+    },
+    cacheDom: function() {
+      this.$save = $('#save');
+    },
+    bindEvent: function() {
+      this.$save.on('click', this.saveSettings.bind(this));
+    },
+    saveSettings: function() {
+
+    },
     head: [],
     css: [],
-    scripts: []
+    script: []
   }
+  resources.init();
+  ////////////////////////////////////////////////////////
   var update = {
   init: function() {
     this.buildDoc();
@@ -66,43 +81,18 @@ $(function(){
 }
 update.init();
 ////////////////////////////////////////////////////////////
-// var cssResources = {
-//   init: function() {
-//     this.cacheDom();
-//     this.bindEvents();
-//   },
-//   cacheDom: function() {
-//     this.$cssQuickSelect = $('#css-quick-select');
-//     this.$cssAssets = $('#css-assets');
-//   },
-//   bindEvents: function() {
-//     this.$cssQuickSelect.on('change', this.gatherCssAssets.bind(this));
-//   },
-//   gatherCssAssets: function() {
-//     var $currentVal = $('#css-quick-select option:selected').val();
-//     var $objResources = this.$cssAssets.find('input');
-//     if (!$objResources.val()) {
-//       $objResources.val($currentVal);
-//       console.log($objResources)
-//     } else {
-//       this.$cssAssets.append('<input type="text" value="'+ $currentVal +'">')
-//     }
-//   }
-// }
-// cssResources.init();
-
 
 var collectResources = {
   init: function() {
     this.cacheDom();
-    this.bindEvents();
+    this.bindEvent();
   },
   cacheDom: function() {
     this.$settingsModal = $('#settings-modal');
     this.$quickSelect = $('.quick-select');
     this.$assets = $('.assets');
   },
-  bindEvents: function() {
+  bindEvent: function() {
     this.$quickSelect.on('change', this.gatherAssets.bind(this));
   },
   gatherAssets: function(e) {
@@ -116,6 +106,7 @@ var collectResources = {
       }
     })
     if ($resource == 'html') {
+      resources.head.push($currentVal);
       var $htmlInputs = this.$settingsModal.find($('input[name=html]'));
       if (!$htmlInputs.val()) {
         $htmlInputs.val($currentVal);
@@ -124,6 +115,7 @@ var collectResources = {
       }
     }
     if ($resource == 'css') {
+      resources.css.push($currentVal);
       var $cssInputs = this.$settingsModal.find($('input[name=css]'));
       if (!$cssInputs.val()) {
         $cssInputs.val($currentVal);
@@ -132,6 +124,7 @@ var collectResources = {
       }
     }
     if ($resource == 'js') {
+      resources.script.push($currentVal);
       var $jsInputs = this.$settingsModal.find($('input[name=js]'));
       if (!$jsInputs.val()) {
         $jsInputs.val($currentVal);
@@ -148,7 +141,7 @@ collectResources.init();
 var input = {
   init: function() {
     this.cacheDom();
-    this.bindEvent();
+    this.bindEvents();
   },
   cacheDom: function() {
     this.$panels = $('#panels-container');
@@ -156,7 +149,7 @@ var input = {
     this.$cssIn = this.$panels.find('#css-panel .CodeMirror');
     this.$jsRun = this.$panels.find('#runScript');
   },
-  bindEvent: function() {
+  bindEvents: function() {
     this.$htmlIn.on('change keyup paste', this.htmlUpdate.bind(this))
     this.$cssIn.on('change keyup paste', this.cssUpdate.bind(this))
     this.$jsRun.on('click', this.docUpdate.bind(this))
@@ -176,7 +169,7 @@ input.init();
 var settingsModal = {
   init: function() {
     this.cacheDom();
-    this.bindEvent();
+    this.bindEvents();
   },
   cacheDom: function() {
     this.$modal = $('#settings-modal-container');
@@ -186,7 +179,7 @@ var settingsModal = {
     this.$modalNavBtn = $('.modal-nav-a');
     this.$language = $('.language');
   },
-  bindEvent: function() {
+  bindEvents: function() {
     this.$settingsBtn.on('click', this.focusSettings.bind(this));
     this.$overlay.on('click', this.toggleSettings.bind(this));
     this.$modalNavBtn.on('click', this.toggleState.bind(this));

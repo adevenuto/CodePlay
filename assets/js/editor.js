@@ -28,6 +28,11 @@ $(function(){
     theme: "mbo"
   });
   /////////////////////////////////////////////////////
+  var resources = {
+    head: [],
+    css: [],
+    scripts: []
+  }
   var update = {
   init: function() {
     this.buildDoc();
@@ -60,6 +65,85 @@ $(function(){
   }
 }
 update.init();
+////////////////////////////////////////////////////////////
+// var cssResources = {
+//   init: function() {
+//     this.cacheDom();
+//     this.bindEvents();
+//   },
+//   cacheDom: function() {
+//     this.$cssQuickSelect = $('#css-quick-select');
+//     this.$cssAssets = $('#css-assets');
+//   },
+//   bindEvents: function() {
+//     this.$cssQuickSelect.on('change', this.gatherCssAssets.bind(this));
+//   },
+//   gatherCssAssets: function() {
+//     var $currentVal = $('#css-quick-select option:selected').val();
+//     var $objResources = this.$cssAssets.find('input');
+//     if (!$objResources.val()) {
+//       $objResources.val($currentVal);
+//       console.log($objResources)
+//     } else {
+//       this.$cssAssets.append('<input type="text" value="'+ $currentVal +'">')
+//     }
+//   }
+// }
+// cssResources.init();
+
+
+var collectResources = {
+  init: function() {
+    this.cacheDom();
+    this.bindEvents();
+  },
+  cacheDom: function() {
+    this.$settingsModal = $('#settings-modal');
+    this.$quickSelect = $('.quick-select');
+    this.$assets = $('.assets');
+  },
+  bindEvents: function() {
+    this.$quickSelect.on('change', this.gatherAssets.bind(this));
+  },
+  gatherAssets: function(e) {
+    var $currentVal;
+    var $resource;
+    var $target = $(e.target).attr('name');
+    this.$quickSelect.each(function(){
+      if ($(this).attr('name') == $target) {
+        $currentVal = $(this).find('option:selected').val();
+        $resource = $(this).attr('name');
+      }
+    })
+    if ($resource == 'html') {
+      var $htmlInputs = this.$settingsModal.find($('input[name=html]'));
+      if (!$htmlInputs.val()) {
+        $htmlInputs.val($currentVal);
+      } else {
+        $htmlInputs.parent().append('<input type="text" value="'+ $currentVal +'">')
+      }
+    }
+    if ($resource == 'css') {
+      var $cssInputs = this.$settingsModal.find($('input[name=css]'));
+      if (!$cssInputs.val()) {
+        $cssInputs.val($currentVal);
+      } else {
+        $cssInputs.parent().append('<input type="text" value="'+ $currentVal +'">')
+      }
+    }
+    if ($resource == 'js') {
+      var $jsInputs = this.$settingsModal.find($('input[name=js]'));
+      if (!$jsInputs.val()) {
+        $jsInputs.val($currentVal);
+      } else {
+        $jsInputs.parent().append('<input type="text" value="'+ $currentVal +'">')
+      }
+    }
+  }
+}
+collectResources.init();
+
+
 ////////////////////////////////////////////////////////////
 var input = {
   init: function() {

@@ -40,7 +40,7 @@ $(function(){
       this.$save.on('click', this.saveSettings.bind(this));
     },
     saveSettings: function() {
-
+      update.init();
     },
     head: [],
     css: [],
@@ -61,14 +61,24 @@ $(function(){
     var frame = document.getElementById('output'),
       doc = frame.contentDocument || frame.contentWindow.document;
       doc.open();
+
       // Head Content
-      doc.write('<link rel="stylesheet prefetch" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">')
+      resources.css.forEach(function(css){
+        doc.write(css)
+      });
+
       doc.write('<style type="text/css">' + editorCss.getValue() + '</style>')
+
       // Body Content
-      doc.write('<body>' + editorHtml.getValue() +
-        '<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>' +
-        '<script>' + editorJs.getValue() + '</script>' +
-        '</body>')
+      doc.write('<body>' + editorHtml.getValue())
+
+        resources.script.forEach(function(script){
+          doc.write(script)
+        });
+
+      doc.write('<script>' + editorJs.getValue() + '</script>' +
+      '</body>')
+
       doc.close();
     this.cacheDom();
   },

@@ -20,27 +20,5 @@ $(function(){
     }
   }
   controls.init();
-  ///////////////////////////////////////////////////
-  $(".resize").resizable({
-    handles: 'e',
-    minWidth: 20,
-    start:function(){
-       $("#output").addClass('pointer-evnt-none');
-       this.other = $(this).next();
-       this.startWidth = this.other.width();
-    },
-    stop: function() {
-      $("#output").removeClass('pointer-evnt-none');
-    },
-    resize:function(e,ui) {
-       var minWidth = ui.element.resizable("option", "minWidth");
-       var diffW = ui.size.width-ui.originalSize.width;
-       if (diffW > this.startWidth-minWidth){
-           diffW =  this.startWidth;
-           ui.size.width = ui.originalSize.width+diffW-minWidth;
-       }
-       this.other.width( Math.max(50, this.startWidth - diffW)  );
-     }
-  });
 }());
 

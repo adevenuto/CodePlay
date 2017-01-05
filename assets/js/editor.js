@@ -240,5 +240,27 @@ var dimRun = {
   }
 }
 dimRun.init();
+///////////////////////////////////////////////////
+  $(".resize").resizable({
+    handles: 'e',
+    minWidth: 20,
+    start:function(){
+       $("#output").addClass('pointer-evnt-none');
+       this.other = $(this).next();
+       this.startWidth = this.other.width();
+    },
+    stop: function() {
+      $("#output").removeClass('pointer-evnt-none');
+    },
+    resize:function(e,ui) {
+      var panelId = "#" + e.target.id;
+      if (panelId == "#html-panel")
+        editorHtml.setSize($(panelId).width());
+      if (panelId == "#css-panel")
+        editorCss.setSize($(panelId).width());
+      if (panelId == "#js-panel")
+        editorJs.setSize($(panelId).width());
+    }
+  });
 }());
 

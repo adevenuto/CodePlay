@@ -62,22 +62,26 @@ $(function(){
       doc = frame.contentDocument || frame.contentWindow.document;
       doc.open();
 
-      // Head Content
+      // Head Content (Meta tags)
+      resources.head.forEach(function(head){
+        doc.write(head);
+      });
+      // Head Content (Additional Css)
       resources.css.forEach(function(css){
-        doc.write(css)
+        doc.write("<link rel='stylesheet prefetch' href=" +css+ ">");
       });
 
-      doc.write('<style type="text/css">' + editorCss.getValue() + '</style>')
+      doc.write('<style type="text/css">' + editorCss.getValue() + '</style>');
 
-      // Body Content
-      doc.write('<body>' + editorHtml.getValue())
+      // Body Content (Additional Scripts)
+      doc.write('<body>' + editorHtml.getValue());
 
-        resources.script.forEach(function(script){
-          doc.write(script)
-        });
+      resources.script.forEach(function(script){
+        doc.write("<script type='text/javascript' src=" +script+ "></script>");
+      });
 
       doc.write('<script>' + editorJs.getValue() + '</script>' +
-      '</body>')
+      '</body>');
 
       doc.close();
     this.cacheDom();
@@ -243,7 +247,7 @@ dimRun.init();
 ///////////////////////////////////////////////////
   $(".resize").resizable({
     handles: 'e',
-    minWidth: 20,
+    minWidth: 30,
     start:function(){
        $("#output").addClass('pointer-evnt-none');
        this.other = $(this).next();
@@ -255,11 +259,11 @@ dimRun.init();
     resize:function(e,ui) {
       var panelId = "#" + e.target.id;
       if (panelId == "#html-panel")
-        editorHtml.setSize($(panelId).width());
+        editorHtml.setSize($(panelId).width(), $(panelId).height());
       if (panelId == "#css-panel")
-        editorCss.setSize($(panelId).width());
+        editorCss.setSize($(panelId).width(), $(panelId).height());
       if (panelId == "#js-panel")
-        editorJs.setSize($(panelId).width());
+        editorJs.setSize($(panelId).width(), $(panelId).height());
     }
   });
 }());

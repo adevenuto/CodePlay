@@ -205,7 +205,7 @@ ul, li, h1, h2, h3, h4, h5, p, body {
   height: auto; }
 
 .CodeMirror-sizer {
-  top: 40px;
+  padding-top: 40px;
   border-right: 0px; }
 
 .CodeMirror-scroll {

@@ -105,9 +105,13 @@ var collectResources = {
     this.$settingsModal = $('#settings-modal');
     this.$quickSelect = $('.quick-select');
     this.$assets = $('.assets');
+    this.$addNew = $('.new-resource');
+    this.$removeResource = $('.fa-times');
   },
   bindEvent: function() {
     this.$quickSelect.on('change', this.gatherAssets.bind(this));
+    this.$addNew.on('click', this.addResource.bind(this));
+    this.$assets.on('click', '.fa-times', this.removeResource.bind(this));
   },
   gatherAssets: function(e) {
     var $currentVal;
@@ -117,7 +121,7 @@ var collectResources = {
       if ($(this).attr('name') == $target) {
         $currentVal = $(this).find('option:selected').val();
         $resource = $(this).attr('name');
-      }
+      };
     })
     if ($resource == 'html') {
       resources.head.push($currentVal);
@@ -125,8 +129,8 @@ var collectResources = {
       if (!$htmlInputs.val()) {
         $htmlInputs.val($currentVal);
       } else {
-        $htmlInputs.parent().append('<input type="text" value="'+ $currentVal +'">')
-      }
+        $htmlInputs.parent().append('<div><input type="text" value="'+ $currentVal +'"> <i class="fa fa-times"></i></div>')
+      };
     }
     if ($resource == 'css') {
       resources.css.push($currentVal);
@@ -134,8 +138,8 @@ var collectResources = {
       if (!$cssInputs.val()) {
         $cssInputs.val($currentVal);
       } else {
-        $cssInputs.parent().append('<input type="text" value="'+ $currentVal +'">')
-      }
+        $cssInputs.parent().append('<div><input type="text" value="'+ $currentVal +'"> <i class="fa fa-times"></i></div>')
+      };
     }
     if ($resource == 'js') {
       resources.script.push($currentVal);
@@ -143,9 +147,19 @@ var collectResources = {
       if (!$jsInputs.val()) {
         $jsInputs.val($currentVal);
       } else {
-        $jsInputs.parent().append('<input type="text" value="'+ $currentVal +'">')
+        $jsInputs.parent().append('<div><input type="text" value="'+ $currentVal +'"> <i class="fa fa-times"></i></div>')
       }
-    }
+    };
+  },
+  addResource: function() {
+    this.$assets.append("<div class='resource'><input type='text'> <i class='fa fa-times'></i></div>");
+  },
+  removeResource: function(e) {
+    // remove from dom
+    var target = $(e.target);
+    target.parent().remove();
+    // remove from resource object
+
   }
 }
 collectResources.init();

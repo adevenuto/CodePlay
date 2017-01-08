@@ -56,13 +56,17 @@
     <div id="settings-modal">
       <h1>Settings</h1>
       <ul id="modal-nav">
-        <li><h3><a href="#html-settings" class="modal-nav-a">html</a></h3></li>
-        <li><h3><a href="#css-settings" class="modal-nav-a">css</a></h3></li>
-        <li><h3><a href="#js-settings" class="modal-nav-a">javascript</a></h3></li>
+        <li><h3><a href="#html-settings" data-type="html" class="modal-nav-a">html</a></h3></li>
+        <li><h3><a href="#css-settings" data-type="css" class="modal-nav-a">css</a></h3></li>
+        <li><h3><a href="#js-settings" data-type="js" class="modal-nav-a">javascript</a></h3></li>
       </ul>
+
+
       <div id="html-settings" class="language hide">
-        <div class="assets">
-          <input type="text" name="html">
+        <div class="assets" data-type="html">
+          <div class="permanentInput">
+            <input type="text" name="html"> <i class="fa fa-times deleteVal"></i>
+          </div>
         </div>
         <p>Quick Add</p>
         <select class="quick-select" name="html">
@@ -71,9 +75,13 @@
         </select>
         <div class="new-resource">Add New <i class="fa fa-plus"></i></div>
       </div>
+
+
       <div id="css-settings" class="language hide">
-        <div class="assets">
-          <input type="text" name="css">
+        <div class="assets" data-type="css">
+          <div class="permanentInput">
+            <input type="text" name="css"> <i class="fa fa-times deleteVal"></i>
+          </div>
         </div>
         <p>Quick Add</p>
         <select class="quick-select" name="css">
@@ -81,11 +89,15 @@
           <option value="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">Font Awesome</option>
           <option value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">Bootstrap</option>
         </select>
-        <div class="new-resource">Add New <i class="fa fa-plus"></i></div>
+        <div class="new-resource">Add New <i class="fa fa-plus deleteVal"></i></div>
       </div>
+
+
       <div id="js-settings" class="language hide">
-        <div class="assets">
-          <input type="text" name="js">
+        <div class="assets" data-type="js">
+          <div class="permanentInput">
+            <input type="text" name="js"> <i class="fa fa-times"></i>
+          </div>
         </div>
         <p>Quick Add</p>
         <select class="quick-select" name="js">
@@ -95,6 +107,8 @@
         </select>
         <div class="new-resource">Add New <i class="fa fa-plus"></i></div>
       </div>
+
+
       <div id="save">Save Settings</div>
     </div>
   </div>

@@ -105,17 +105,18 @@ var collectResources = {
     this.$settingsModal = $('#settings-modal');
     this.$quickSelect = $('.quick-select');
     this.$assets = $('.assets');
-    this.$addNew = $('.new-resource');
     this.$removeResource = $('.fa-times');
   },
   bindEvent: function() {
     this.$quickSelect.on('change', this.gatherAssets.bind(this));
-    this.$addNew.on('click', this.addResource.bind(this));
-    this.$assets.on('click', '.fa-times', this.removeResource.bind(this));
+    this.$settingsModal.on('click', '.new-resource', this.addResource.bind(this));
+    this.$settingsModal.on('click', '.deleteVal', this.permanentInput.bind(this));
+    this.$assets.on('click', '.deleteInput', this.removeResource.bind(this));
   },
   gatherAssets: function(e) {
     var $currentVal;
     var $resource;
+    var populated = false;
     var $target = $(e.target).attr('name');
     this.$quickSelect.each(function(){
       if ($(this).attr('name') == $target) {
@@ -123,43 +124,63 @@ var collectResources = {
         $resource = $(this).attr('name');
       };
     })
-    if ($resource == 'html') {
-      resources.head.push($currentVal);
-      var $htmlInputs = this.$settingsModal.find($('input[name=html]'));
-      if (!$htmlInputs.val()) {
-        $htmlInputs.val($currentVal);
-      } else {
-        $htmlInputs.parent().append('<div><input type="text" value="'+ $currentVal +'"> <i class="fa fa-times"></i></div>')
+    if ($resource == 'html' && $currentVal !== '---') {
+      var $htmlInputs = $('input[name=html]');
+      $htmlInputs.each(function(){
+        if (!$(this).val()) {
+          $(this).val($currentVal);
+          populated = true;
+          return false;
+        };
+      });
+      if ($htmlInputs.last().val() && !populated) {
+        $('.assets[data-type=html').append('<div><input type="text" name="html" value="'+ $currentVal +'"> <i class="fa fa-times deleteInput"></i></div>');
+        populated = false;
       };
-    }
-    if ($resource == 'css') {
-      resources.css.push($currentVal);
-      var $cssInputs = this.$settingsModal.find($('input[name=css]'));
-      if (!$cssInputs.val()) {
-        $cssInputs.val($currentVal);
-      } else {
-        $cssInputs.parent().append('<div><input type="text" value="'+ $currentVal +'"> <i class="fa fa-times"></i></div>')
+      populated = false;
+    };
+    if ($resource == 'css' && $currentVal !== '---') {
+      var $cssInputs = $('input[name=css]');
+      $cssInputs.each(function(){
+        if (!$(this).val()) {
+          $(this).val($currentVal);
+          populated = true;
+          return false;
+        };
+      });
+      if ($cssInputs.last().val() && !populated) {
+        $('.assets[data-type=css').append('<div><input type="text" name="css" value="'+ $currentVal +'"> <i class="fa fa-times deleteInput"></i></div>');
+        populated = false;
       };
-    }
-    if ($resource == 'js') {
-      resources.script.push($currentVal);
-      var $jsInputs = this.$settingsModal.find($('input[name=js]'));
-      if (!$jsInputs.val()) {
-        $jsInputs.val($currentVal);
-      } else {
-        $jsInputs.parent().append('<div><input type="text" value="'+ $currentVal +'"> <i class="fa fa-times"></i></div>')
-      }
+      populated = false;
+    };
+    if ($resource == 'js' && $currentVal !== '---') {
+      var $jsInputs = $('input[name=js]');
+      $jsInputs.each(function(){
+        if (!$(this).val()) {
+          $(this).val($currentVal);
+          populated = true;
+          return false;
+        };
+      });
+      if ($jsInputs.last().val() && !populated) {
+        $('.assets[data-type=js').append('<div><input type="text" name="js" value="'+ $currentVal +'"> <i class="fa fa-times deleteInput"></i></div>');
+        populated = false;
+      };
+      populated = false;
     };
   },
   addResource: function() {
-    this.$assets.append("<div class='resource'><input type='text'> <i class='fa fa-times'></i></div>");
+    var resource = settingsModal.currentState;
+    $(".assets[data-type='"+resource+"']").append("<div class='resource'><input name='"+resource+"' type='text'> <i class='fa fa-times deleteInput'></i></div>");
   },
   removeResource: function(e) {
     // remove from dom
     var target = $(e.target);
     target.parent().remove();
-    // remove from resource object
-
+  },
+  permanentInput: function(e) {
+    $(e.target).prev().val('');
   }
 }
 collectResources.init();
@@ -212,15 +233,19 @@ var settingsModal = {
     this.$overlay.on('click', this.toggleSettings.bind(this));
     this.$modalNavBtn.on('click', this.toggleState.bind(this));
   },
+  currentState: '',
   focusSettings: function(e) {
     this.toggleSettings();
     var $btnDataType = $(e.target).attr('data-type');
+    this.currentState = $btnDataType;
     if ($btnDataType === 'html') $('a[href="#html-settings"]').click();
     if ($btnDataType === 'css') $('a[href="#css-settings"]').click();
     if ($btnDataType === 'js') $('a[href="#js-settings"]').click();
   },
   toggleState: function(e) {
     var $target = $(e.target);
+    var $targetDataType = $(e.target).attr('data-type');
+    this.currentState = $targetDataType;
     if (!$target.hasClass('active')) {
       // Toggle Nav Btn
       $target.toggleClass('active');

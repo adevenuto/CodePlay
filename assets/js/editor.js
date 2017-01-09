@@ -40,6 +40,29 @@ $(function(){
       this.$save.on('click', this.saveSettings.bind(this));
     },
     saveSettings: function() {
+      var validate = /^((ftp|http|https):)?\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/gi;
+
+      $('input[name=html]').each(function(){
+        var value = $(this).val();
+        if (resources.head.indexOf(value)<0) {
+            resources.head.push(value);
+            settingsModal.toggleSettings();
+        };
+      });
+      $('input[name=css]').each(function(){
+        var value = $(this).val();
+        if (value.match(validate) && resources.css.indexOf(value)<0) {
+            resources.css.push(value);
+            settingsModal.toggleSettings();
+        };
+      });
+      $('input[name=js]').each(function(){
+        var value = $(this).val();
+        if (value.match(validate) && resources.css.indexOf(value)<0) {
+            resources.script.push(value);
+            settingsModal.toggleSettings();
+        };
+      });
       update.init();
     },
     head: [],
@@ -105,13 +128,12 @@ var collectResources = {
     this.$settingsModal = $('#settings-modal');
     this.$quickSelect = $('.quick-select');
     this.$assets = $('.assets');
-    this.$removeResource = $('.fa-times');
   },
   bindEvent: function() {
     this.$quickSelect.on('change', this.gatherAssets.bind(this));
     this.$settingsModal.on('click', '.new-resource', this.addResource.bind(this));
-    this.$settingsModal.on('click', '.deleteVal', this.permanentInput.bind(this));
-    this.$assets.on('click', '.deleteInput', this.removeResource.bind(this));
+    this.$settingsModal.on('click', '.deleteVal', this.removeValue.bind(this));
+    this.$assets.on('click', '.deleteInput', this.removeInput.bind(this));
   },
   gatherAssets: function(e) {
     var $currentVal;
@@ -174,12 +196,39 @@ var collectResources = {
     var resource = settingsModal.currentState;
     $(".assets[data-type='"+resource+"']").append("<div class='resource'><input name='"+resource+"' type='text'> <i class='fa fa-times deleteInput'></i></div>");
   },
-  removeResource: function(e) {
+  removeResource: function(type, val) {
+
+      if (type === "html") {
+        var htmlVal = resources.head.indexOf(val);
+        if (htmlVal>=0) resources.head.splice(htmlVal);
+        // console.log(resources.head)
+      };
+      if (type === "css") {
+        var cssVal = resources.css.indexOf(val);
+        if (cssVal>=0) resources.css.splice(cssVal);
+        // console.log(resources.css)
+      };
+      if (type === "js") {
+        var jsVal = resources.script.indexOf(val);
+        if (jsVal>=0) resources.script.splice(jsVal);
+        // console.log(resources.script)
+      };
+
+  },
+  removeInput: function(e) {
     // remove from dom
     var target = $(e.target);
+    var type = target.prev().attr('name');
+    var val = target.prev().val();
+    collectResources.removeResource(type, val);
     target.parent().remove();
   },
-  permanentInput: function(e) {
+  // remove value when X is clicked on first input only
+  removeValue: function(e) {
+    var target = $(e.target);
+    var type = target.prev().attr('name');
+    var val = target.prev().val();
+    collectResources.removeResource(type, val);
     $(e.target).prev().val('');
   }
 }
@@ -243,6 +292,7 @@ var settingsModal = {
     if ($btnDataType === 'js') $('a[href="#js-settings"]').click();
   },
   toggleState: function(e) {
+    e.preventDefault();
     var $target = $(e.target);
     var $targetDataType = $(e.target).attr('data-type');
     this.currentState = $targetDataType;
@@ -260,7 +310,6 @@ var settingsModal = {
     this.$modal.toggleClass('show');
     this.$overlay.toggleClass('show');
   }
-  // Do Something When Save Is Clicked
 }
 settingsModal.init();
 //////////////////////////////////////

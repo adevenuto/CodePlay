@@ -46,23 +46,21 @@ $(function(){
         var value = $(this).val();
         if (resources.head.indexOf(value)<0) {
             resources.head.push(value);
-            settingsModal.toggleSettings();
         };
       });
       $('input[name=css]').each(function(){
         var value = $(this).val();
         if (value.match(validate) && resources.css.indexOf(value)<0) {
             resources.css.push(value);
-            settingsModal.toggleSettings();
         };
       });
       $('input[name=js]').each(function(){
         var value = $(this).val();
         if (value.match(validate) && resources.css.indexOf(value)<0) {
             resources.script.push(value);
-            settingsModal.toggleSettings();
         };
       });
+      settingsModal.toggleSettings();
       update.init();
     },
     head: [],

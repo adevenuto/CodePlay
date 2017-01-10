@@ -245,6 +245,9 @@ ul, li, h1, h2, h3, h4, h5, p, body {
 .cm-s-mbo.CodeMirror {
   background: #000; }
 
+.CodeMirror-vscrollbar {
+  overflow-y: hidden; }
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px; }

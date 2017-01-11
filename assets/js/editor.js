@@ -330,6 +330,21 @@ var dimRun = {
   }
 }
 dimRun.init();
+
+// Emulates handle grag event
+$.widget("ui.resizable", $.ui.resizable, {
+  resizeTo: function(newSize) {
+    var start = new $.Event("mousedown", { pageX: 0, pageY: 0 });
+    this._mouseStart(start);
+    this.axis = 'se';
+    var end = new $.Event("mouseup", {
+        pageX: newSize.width - this.originalSize.width,
+        pageY: newSize.height - this.originalSize.height
+  });
+  this._mouseDrag(end);
+  this._mouseStop(end);
+    }
+  });
 ///////////////////////////////////////////////////
   $(".resize").resizable({
     handles: 'e',
@@ -354,16 +369,79 @@ dimRun.init();
       var target = $(e.target);
       var panelName = target.find('.panel-name');
       var runBtn = $('#runScript');
-      if (target.width() <= 95) {
+      if (target.width() <= 125) {
         panelName.addClass('compress');
-        if (target.attr('id') === "js-panel") {
+        if (panelId === "#js-panel") {
           runBtn.hide();
         }
-      } else if (target.width() > 95) {
-        runBtn.show();
+      } else if (target.width() > 125) {
+        if (panelId === "#js-panel") {
+          runBtn.show();
+        }
         panelName.removeClass('compress');
       }
     }
   });
+// Toggle panel state open/close
+  var panelState = {
+    init: function() {
+      this.cacheDom();
+      this.bindEvent();
+    },
+    cacheDom: function() {
+      this.$panelBtn = $('.fa-bars');
+    },
+    bindEvent: function() {
+      this.$panelBtn.on('click', this.toggleState.bind(this))
+    },
+    toggleState: function(e) {
+      var $panelId = $(e.target).closest('.panel').attr('id');
+      var $target = $(e.target).closest('.ui-resizable');
+      var $targetWidth = $target.width();
+      var startWidth = 275;
+
+      if ($targetWidth > 29) {
+        $target.resizable("resizeTo", { width: 30 });
+      } else {
+        $target.resizable("resizeTo", { width: startWidth });
+      }
+    }
+  }
+  panelState.init();
+  // Refresh script in full screen view
+  var outputHelper = {
+    init: function() {
+      this.cacheDom();
+      this.bindEvents();
+      this.setWidth();
+    },
+    cacheDom: function() {
+      this.$output = $('#output-panel');
+      this.$codePanels = $('.panel');
+      this.$controlsContainer = $('#controls-container');
+      this.$arrows = this.$controlsContainer.find('.fa-arrows');
+      this.$outputSize = this.$controlsContainer.find('#output-size');
+      this.$refreshScript = this.$controlsContainer.find('#full-screen-run');
+    },
+    bindEvents: function() {
+      $(window).resize('#output-panel', this.setWidth.bind(this));
+      this.$arrows.on('click', this.fullScreen.bind(this));
+      this.$refreshScript.on('click', this.refresh.bind(this));
+    },
+    setWidth: function() {
+      this.$outputSize.html(Math.floor(this.$output.width())+"px");
+    },
+    fullScreen: function() {
+      this.$codePanels.each(function() {
+        $(this).toggleClass('hide');
+      });
+      this.$refreshScript.toggleClass('show');
+      outputHelper.setWidth();
+    },
+    refresh: function() {
+      update.init();
+    }
+  }
+  outputHelper.init();
 }());
 

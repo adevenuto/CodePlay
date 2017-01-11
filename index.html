@@ -12,12 +12,12 @@
 <div id="editor-container">
   <!-- Panel Controls -->
   <div id="panels-controls-container">
-    <div id="panel-controls">
+    <!-- <div id="panel-controls">
       <button class="sizer">html</button>
       <button class="sizer">css</button>
       <button class="sizer">js</button>
-      <!-- <button>output</button> -->
-    </div>
+      <button>output</button>
+    </div> -->
     <div id="output-helper">
       <span id="output-size">0</span>
       <i class="fa fa-arrows"></i>
@@ -27,13 +27,15 @@
   <div id="panels-container">
     <div class="panel resize" id="html-panel">
       <div class="panel-name">
-        <i class="fa fa-gear" data-type="html"></i><span>|</span>html
+        <i class="fa fa-gear" data-type="html"></i><span><i class="fa fa-bars" aria-hidden="true"></i>
+</span>html
       </div>
       <textarea id="html-input"></textarea>
     </div>
     <div class="panel resize" id="css-panel">
       <div class="panel-name">
-        <i class="fa fa-gear" data-type="css"></i><span>|</span>css
+        <i class="fa fa-gear" data-type="css"></i><span><i class="fa fa-bars" aria-hidden="true"></i>
+</span>css
       </div>
       <textarea id="css-input"></textarea>
     </div>
@@ -42,7 +44,8 @@
         run
       </div>
       <div class="panel-name">
-        <i class="fa fa-gear" data-type="js"></i><span>|</span>js
+        <i class="fa fa-gear" data-type="js"></i><span><i class="fa fa-bars" aria-hidden="true"></i>
+</span>js
       </div>
       <textarea id="js-input"></textarea>
     </div>

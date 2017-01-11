@@ -30,6 +30,7 @@ ul,li,h1,h2,h3,h4,h5,p,body {
 #panels-controls-container {
   position: relative;
   padding: 8px;
+  height: 50px;
   background: #666;
   border-bottom: 2px solid #000;
 }
@@ -125,20 +126,31 @@ ul,li,h1,h2,h3,h4,h5,p,body {
 }
 .panel-name {
   position: absolute;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   border-radius: 3px;
   display: table;
   text-transform: uppercase;
   background: #666;
   color: #fff;
   top: 3px;
-  right: 3px;
-  padding: 3px;
+  left: 35px;
+  padding: 0 3px;
   z-index: 10;
+  transition: left 75ms linear;
   span {
     margin: 0 8px;
     color: #ff5722;
   }
+}
+.compress {
+  left: 18px;
+  width: 100px;
+  transform: rotate(90deg);
+  transform-origin: 0 0;
+  border-color: transparent;
+  border: none;
+  padding: 0;
+  background: transparent;
 }
 #runScript {
   position: absolute;
@@ -150,9 +162,8 @@ ul,li,h1,h2,h3,h4,h5,p,body {
   background: #000;
   color: #fff;
   top: 3px;
-  left: 34px;
-  padding: 2px 10px;
-  letter-spacing: 4px;
+  right: 4px;
+  padding: 0px 10px;
   transition: opacity, 100ms ease-in-out;
   z-index: 10;
 }

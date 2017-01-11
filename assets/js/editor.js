@@ -350,6 +350,19 @@ dimRun.init();
         editorCss.setSize($(panelId).width(), $(panelId).height());
       if (panelId == "#js-panel")
         editorJs.setSize($(panelId).width(), $(panelId).height());
+
+      var target = $(e.target);
+      var panelName = target.find('.panel-name');
+      var runBtn = $('#runScript');
+      if (target.width() <= 95) {
+        panelName.addClass('compress');
+        if (target.attr('id') === "js-panel") {
+          runBtn.hide();
+        }
+      } else if (target.width() > 95) {
+        runBtn.show();
+        panelName.removeClass('compress');
+      }
     }
   });
 }());

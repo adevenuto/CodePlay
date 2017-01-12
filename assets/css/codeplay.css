@@ -51,6 +51,7 @@ ul, li, h1, h2, h3, h4, h5, p, body {
   border: 2px solid #fff;
   text-transform: uppercase;
   color: #fff;
+  cursor: pointer;
   background: transparent;
   -moz-box-shadow: 0px 2px 3px 0px #000;
   -webkit-box-shadow: 0px 2px 3px 0px #000;
@@ -134,7 +135,7 @@ ul, li, h1, h2, h3, h4, h5, p, body {
 
 .panel {
   height: inherit;
-  border-right: 1px solid #000;
+  border-right: 1px solid #e9592b;
   width: 25%;
 }
 

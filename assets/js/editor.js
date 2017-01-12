@@ -42,7 +42,7 @@ $(function(){
     saveSettings: function() {
       var validate = /^((ftp|http|https):)?\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/gi;
 
-      $('input[name=html]').each(function(){
+      $('textarea[name=html]').each(function(){
         var value = $(this).val();
         if (resources.head.indexOf(value)<0) {
             resources.head.push(value);
@@ -145,19 +145,13 @@ var collectResources = {
       };
     })
     if ($resource == 'html' && $currentVal !== '---') {
-      var $htmlInputs = $('input[name=html]');
+      var $htmlInputs = $('textarea[name=html]');
       $htmlInputs.each(function(){
         if (!$(this).val()) {
           $(this).val($currentVal);
-          populated = true;
           return false;
         };
       });
-      if ($htmlInputs.last().val() && !populated) {
-        $('.assets[data-type=html').append('<div><input type="text" name="html" value="'+ $currentVal +'"> <i class="fa fa-times deleteInput"></i></div>');
-        populated = false;
-      };
-      populated = false;
     };
     if ($resource == 'css' && $currentVal !== '---') {
       var $cssInputs = $('input[name=css]');
@@ -195,23 +189,14 @@ var collectResources = {
     $(".assets[data-type='"+resource+"']").append("<div class='resource'><input name='"+resource+"' type='text'> <i class='fa fa-times deleteInput'></i></div>");
   },
   removeResource: function(type, val) {
-
-      if (type === "html") {
-        var htmlVal = resources.head.indexOf(val);
-        if (htmlVal>=0) resources.head.splice(htmlVal);
-        // console.log(resources.head)
-      };
-      if (type === "css") {
-        var cssVal = resources.css.indexOf(val);
-        if (cssVal>=0) resources.css.splice(cssVal);
-        // console.log(resources.css)
-      };
-      if (type === "js") {
-        var jsVal = resources.script.indexOf(val);
-        if (jsVal>=0) resources.script.splice(jsVal);
-        // console.log(resources.script)
-      };
-
+    if (type === "css") {
+      var cssVal = resources.css.indexOf(val);
+      if (cssVal>=0) resources.css.splice(cssVal);
+    };
+    if (type === "js") {
+      var jsVal = resources.script.indexOf(val);
+      if (jsVal>=0) resources.script.splice(jsVal);
+    };
   },
   removeInput: function(e) {
     // remove from dom
@@ -437,6 +422,7 @@ $.widget("ui.resizable", $.ui.resizable, {
       });
       this.$refreshScript.toggleClass('show');
       outputHelper.setWidth();
+      outputHelper.refresh();
     },
     refresh: function() {
       update.init();

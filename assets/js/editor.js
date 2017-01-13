@@ -128,12 +128,12 @@ var collectResources = {
     this.$assets = $('.assets');
   },
   bindEvent: function() {
-    this.$quickSelect.on('change', this.gatherAssets.bind(this));
+    this.$quickSelect.on('change', this.manageAssets.bind(this));
     this.$settingsModal.on('click', '.new-resource', this.addResource.bind(this));
     this.$settingsModal.on('click', '.deleteVal', this.removeValue.bind(this));
     this.$assets.on('click', '.deleteInput', this.removeInput.bind(this));
   },
-  gatherAssets: function(e) {
+  manageAssets: function(e) {
     var $currentVal;
     var $resource;
     var populated = false;
@@ -150,7 +150,11 @@ var collectResources = {
         if (!$(this).val()) {
           $(this).val($currentVal);
           return false;
-        };
+        } else {
+          $(this).val($(this).val()+"\n"+$currentVal)
+          console.log($(this).val())
+          return false;
+        }
       });
     };
     if ($resource == 'css' && $currentVal !== '---') {
@@ -186,9 +190,17 @@ var collectResources = {
   },
   addResource: function() {
     var resource = settingsModal.currentState;
-    $(".assets[data-type='"+resource+"']").append("<div class='resource'><input name='"+resource+"' type='text'> <i class='fa fa-times deleteInput'></i></div>");
+    $(".assets[data-type='"+resource+"']").append(
+      "<div class='resource'>" +
+        "<input name='"+resource+"' type='text'> <i class='fa fa-times deleteInput'></i>" +
+      "</div>");
   },
   removeResource: function(type, val) {
+    if (type === "html") {
+      var headVal = resources.head.indexOf(val);
+      console.log(headVal)
+      if (headVal>=0) resources.head.splice(headVal);
+    };
     if (type === "css") {
       var cssVal = resources.css.indexOf(val);
       if (cssVal>=0) resources.css.splice(cssVal);
@@ -422,7 +434,6 @@ $.widget("ui.resizable", $.ui.resizable, {
       });
       this.$refreshScript.toggleClass('show');
       outputHelper.setWidth();
-      outputHelper.refresh();
     },
     refresh: function() {
       update.init();

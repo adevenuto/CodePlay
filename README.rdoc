@@ -1,3 +1,0 @@
-Codepen-like Clone I decided to make for fun.
-
-[LINK](https://adevenuto.github.io/CodePlay/)
